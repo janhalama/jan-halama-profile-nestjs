@@ -180,7 +180,7 @@ figure.effect-oscar:hover p {
 	opacity: 1;
 	-webkit-transform: scale(1);
 	transform: scale(1);
-	color: #ffffff;+++++++
+	color: #ffffff;
 }
 
 figure.effect-oscar:hover figcaption {
@@ -304,7 +304,7 @@ p {
 }
 
 .navStyle ul li:first-child {
-	/*margin:0px;*/;
+	/*margin:0px;*/
 }
 
 .navStyle ul li:last-child {
@@ -474,8 +474,6 @@ a.read_more:hover {
 .timeline{
 	padding:110px 0;
 }
-.timeline h2{ 
-}
 
 
 
@@ -488,14 +486,8 @@ a.read_more:hover {
     background: #fcfcfc;
     border: 1px dashed #cfcfcf;
 }
-#service h2{
-  /* color: #fff; */
-}
 .service_wrapper {
     padding: 40px 0 0px;
-}
-
-.service_section {
 }
 
 .service_block {
@@ -540,7 +532,6 @@ a.read_more:hover {
     color: #000;
     margin: 35px 0 15px;
 }
-#service h6{/* color:#fff; */}
 .service_block p {
     font-size: 14px;
     color: #585858;
@@ -583,7 +574,6 @@ a.read_more:hover {
 }
 
 .service-list-col1 i {
-    display:;
     color: #888;
     font-size: 19px;
     font-style: normal;
@@ -2272,7 +2262,6 @@ text-align: center;
 p{
 font-size:14px;
 }
-.top_cont_outer {/* height: 420px; */}
 .hero_section {
 position: relative;
 padding-top: 10px;
@@ -2308,7 +2297,7 @@ margin: 0 18px;
 .page_section.team{
 padding: 40px 0;
 }
-, #clients {
+#clients {
 padding: 40px 0;
 }
 .client_logos ul li {
