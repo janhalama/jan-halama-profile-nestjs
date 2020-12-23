@@ -1,5 +1,5 @@
 import { HttpServerConfig } from './httpServerConfig'
-import { SendGridConfig } from './SendGridConfig'
+import { SendGridConfig } from './sendGridConfig'
 
 export interface Configuration {
   httpServerConfig: HttpServerConfig;

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config/dist';
 import { AxiosInstance } from 'axios';
-import { SendGridConfig } from 'config/SendGridConfig';
+import { SendGridConfig } from 'config/sendGridConfig';
 import { CreateMessageResult } from './create-message-result';
 import { CreateMessageDto } from './create-message.dto';
 const axios = require('axios').default;
