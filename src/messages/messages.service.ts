@@ -1,14 +1,70 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config/dist';
+import { AxiosInstance } from 'axios';
+import { SendGridConfig } from 'config/SendGridConfig';
 import { CreateMessageResult } from './create-message-result';
 import { CreateMessageDto } from './create-message.dto';
+const axios = require('axios').default;
 
 @Injectable()
 export class MessagesService {
   private readonly logger = new Logger(MessagesService.name);
-  create(createMessageDto: CreateMessageDto): CreateMessageResult {
+  private readonly axiosInstance: AxiosInstance;
+  constructor(private configService: ConfigService) {
+    const sendGridConfig = this.configService.get<SendGridConfig>('sendGridConfig');
+    this.axiosInstance = axios.create({
+      baseURL: sendGridConfig.baseUrl,
+      timeout: 1000,
+      headers: {
+        Authorization: `Bearer ${sendGridConfig.apiKey}`,
+        'Content-Type': 'application/json',
+      }
+    });
+  }
+  async create(createMessageDto: CreateMessageDto): Promise<CreateMessageResult> {
     this.logger.log('Sending message', JSON.stringify(createMessageDto));
-    return {
-      success: true
+    try {
+      const response = await this.axiosInstance.post('/v3/mail/send', {
+        personalizations: [
+          {
+            to: [
+              {
+                email: 'mail@janhalama.cz'
+              }
+            ],
+            subject: 'My public profile message'
+          }
+        ],
+        from: {
+          email: 'profile@janhalama.cz'
+        },
+        content: [
+          {
+            type: 'text/html',
+            value: `<p>Name: ${createMessageDto.name}</p>
+          <p>E-Mail: ${createMessageDto.email}</p>
+          <p>Message: ${createMessageDto.message}</p>`
+          }
+        ]
+      });
+      if (response.status === 202) {
+        return {
+          success: true
+        }
+      } else {
+        this.logger.error(`Failed to send e-mail, expected status code 202, received status code ${response.status}`);
+        return {
+          success: true,
+          errorMessage: '¯\_(ツ)_/¯ Failed to send your message.',
+        }
+      }
+    }
+    catch (error) {
+      this.logger.error('Failed to send e-mail', error);
+      return {
+        success: false,
+        errorMessage: '¯\_(ツ)_/¯ Failed to send your message.',
+      }
     }
   }
 }

@@ -144,9 +144,18 @@
 										data-validation-minlength-message="Min 5 characters" maxlength="999" style="resize:none"></textarea>
 								</div>
 							</div>
-							<div id="success"> </div> <!-- For success/fail messages -->
 							<button type="submit" class="btn btn-primary pull-right">Send</button><br />
+							<div id="success">
+								{{#if messageSendingResult}}
+								{{#if messageSendingResult.message}}
+								<span class="label-warning">{{messageSendingResult.message}}</span>
+								{{else}}
+								<span class="text-success"><i class="fas fa-check"></i> Thank you for your message. I will send you
+									response within one day.</span>
+								{{/if}}
+								{{/if}} </div>
 						</form>
+
 					</div>
 				</div>
 			</section>

@@ -8,7 +8,7 @@ export class MessagesController {
   constructor(private messageService: MessagesService) { }
   @Post()
   async create(@Body() createMessageDto: CreateMessageDto, @Response() response: express.Response) {
-    const createMessageResult = this.messageService.create(createMessageDto);
+    const createMessageResult = await this.messageService.create(createMessageDto);
     response.redirect(303, `/?success=${createMessageResult.success}` + (createMessageResult.errorMessage ? `&message=${createMessageResult.errorMessage}` : '') + '#contact');
   }
 }
