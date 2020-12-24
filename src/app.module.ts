@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import configuration from 'config/configuration';
+import configuration from '../config/configuration';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
