@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Logger, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
 import { CreateMessageResult } from './messages/create-message-result';
@@ -12,7 +12,7 @@ export class AppController {
     return res.render(
       this.appService.getViewName(),
       {
-        messageSendingResult: messageSendingResult
+        messageSendingResult: (messageSendingResult.success === undefined) ? undefined : messageSendingResult
       }
     );
   }
