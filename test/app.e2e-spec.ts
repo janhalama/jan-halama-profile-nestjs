@@ -26,4 +26,10 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
   });
+
+  it('/messages (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/messages/')
+      .expect(303)
+  });
 });
