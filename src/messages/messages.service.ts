@@ -12,14 +12,16 @@ export class MessagesService {
   private readonly axiosInstance: AxiosInstance;
   constructor(private configService: ConfigService) {
     const sendGridConfig = this.configService.get<SendGridConfig>('sendGridConfig');
-    this.axiosInstance = axios.create({
+    const axiosConfig = {
       baseURL: sendGridConfig.baseUrl,
-      timeout: 1000,
+      timeout: 10000,
       headers: {
         Authorization: `Bearer ${sendGridConfig.apiKey}`,
         'Content-Type': 'application/json',
       }
-    });
+    }
+
+    this.axiosInstance = axios.create(axiosConfig);
   }
   async create(createMessageDto: CreateMessageDto): Promise<CreateMessageResult> {
     this.logger.log('Sending message', JSON.stringify(createMessageDto));
@@ -60,7 +62,7 @@ export class MessagesService {
       }
     }
     catch (error) {
-      this.logger.error('Failed to send e-mail', error);
+      this.logger.error(`Failed to send e-mail with error: ${error.message}`);
       return {
         success: false,
         errorMessage: '¯\_(ツ)_/¯ Failed to send your message.',
