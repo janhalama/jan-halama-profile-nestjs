@@ -12,6 +12,6 @@ export default (): Configuration => ({
   },
   sendGridConfig: {
     baseUrl: 'https://api.sendgrid.com/',
-    apiKey: process.env.SENDGRID_API_KEY,
+    apiKey: process.env.SENDGRID_API_KEY?.trim(),
   }
 });
