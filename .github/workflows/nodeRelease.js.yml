@@ -42,6 +42,8 @@ jobs:
         git add "CHANGELOG.md"
         git commit -m "docs: update changelog"
     - name: create tag
-        run: yarn version --new-version ${NEW_VERSION} 
+      run: |
+        yarn version --new-version ${NEW_VERSION} 
     - name: push changes
-        run: git push origin && git push --tags
+      run: |
+        git push origin && git push --tags
