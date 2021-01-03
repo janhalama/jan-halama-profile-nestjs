@@ -17,16 +17,19 @@ jobs:
         node-version: [14.x]
 
     steps:
+    - name: checkout
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: build
       run: yarn install --frozen-lockfile
       run: yarn build
+    - name: test
       run: yarn test
       run: yarn test:e2e
-    - name: Update Changelog
+    - name: update changelog
       run: |
         npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --release
         export NEW_VERSION=$(npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --latest-release)
