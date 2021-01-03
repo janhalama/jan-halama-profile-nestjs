@@ -29,4 +29,5 @@ jobs:
       run: yarn build
     - name: test
       run: yarn test
+    - name: end-to-end test
       run: yarn test:e2e
