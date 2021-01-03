@@ -34,9 +34,7 @@ jobs:
     - name: update changelog
       run: npx https://github.com:janhalama/keep-a-changelog.git --release
     - run: |
-        export NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)
-        echo ${NEW_VERSION}
-        echo "::NEW_VERSION name=NEW_VERSION::${NEW_VERSION}"
+        echo "NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)" >> $GITHUB_ENV
     - name: commit changelog changes
       run: |
         git config --global user.email "mail@janhalama.cz"
