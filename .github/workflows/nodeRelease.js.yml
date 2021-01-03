@@ -38,4 +38,3 @@ jobs:
         git commit -m "docs: update changelog"
     - run: yarn version --new-version ${NEW_VERSION} 
     - run: git push origin && git push --tags
-    
