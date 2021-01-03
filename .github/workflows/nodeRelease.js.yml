@@ -28,9 +28,9 @@ jobs:
     - run: yarn test:e2e
     - name: Update Changelog
     - run: |
-      npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --release
-      export NEW_VERSION=$(npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --latest-release)
-      echo "::NEW_VERSION name=NEW_VERSION::${NEW_VERSION}"
+        npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --release
+        export NEW_VERSION=$(npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --latest-release)
+        echo "::NEW_VERSION name=NEW_VERSION::${NEW_VERSION}"
     - run: git config --global user.email "mail@janhalama.cz"
     - run: git config --global user.name "GitHub Actions build job"
     - run: git add CHANGELOG.md
