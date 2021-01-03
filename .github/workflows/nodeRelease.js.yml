@@ -32,9 +32,9 @@ jobs:
     - name: end-to-end test
       run: yarn test:e2e
     - name: update changelog
-      run: npx git+ssh://github.com:janhalama/keep-a-changelog.git --release
+      run: npx https://github.com:janhalama/keep-a-changelog.git --release
     - run: |
-        export NEW_VERSION=$(npx git+ssh://github.com:janhalama/keep-a-changelog.git --latest-release)
+        export NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)
         echo "::NEW_VERSION name=NEW_VERSION::${NEW_VERSION}"
     - name: commit changelog changes
       run: |
