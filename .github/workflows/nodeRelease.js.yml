@@ -1,0 +1,49 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: build
+      run: yarn install --frozen-lockfile
+      run: yarn build
+    - name: test
+      run: yarn test
+    - name: end-to-end test
+      run: yarn test:e2e
+    - name: update changelog
+      run: |
+        npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --release
+        export NEW_VERSION=$(npx -q git+ssh://github.com:janhalama/keep-a-changelog.git --latest-release)
+        echo "::NEW_VERSION name=NEW_VERSION::${NEW_VERSION}"
+    - name: commit changelog changes
+      run: |
+        git config --global user.email "mail@janhalama.cz"
+        git config --global user.name "GitHub Actions build job"
+        git add "CHANGELOG.md"
+        git commit -m "docs: update changelog"
+    - name: create tag
+      run: |
+        yarn version --new-version ${NEW_VERSION} 
+    - name: push changes
+      run: |
+        git push origin && git push --tags
