@@ -8,14 +8,11 @@ on:
     branches: [ main ]
 
 jobs:
-  release:
-
+  test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-
     steps:
     - name: checkout
       uses: actions/checkout@v2
@@ -31,21 +28,34 @@ jobs:
       run: yarn test
     - name: end-to-end test
       run: yarn test:e2e
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
     - name: update changelog
-      run: npx https://github.com:janhalama/keep-a-changelog.git --release
-    - run: |
+      run: |
+        npx https://github.com:janhalama/keep-a-changelog.git --release
+        echo "RELEASE_SUCCESS=$($?) >> $GITHUB_ENV
+    - if: ${{ RELEASE_SUCCESS == 0 }}
+      run: |
         echo "NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)" >> $GITHUB_ENV
-    - name: commit changelog changes
+    - if: ${{ RELEASE_SUCCESS == 0 }}
+      name: commit changelog changes
       run: |
         git config --global user.email "mail@janhalama.cz"
         git config --global user.name "GitHub Actions build job"
         git add "CHANGELOG.md"
         git commit -m "docs: update changelog"
-    - name: create tag
+    - if: ${{ RELEASE_SUCCESS == 0 }}
+      name: create tag
       run: |
         echo ${NEW_VERSION}
         yarn version --new-version ${NEW_VERSION} 
-    - name: push changes
+    - if: ${{ RELEASE_SUCCESS == 0 }}
+      name: push changes
       env:
         GITHUB_TOKEN: ${{ secrets.JANS_GITHUB_TOKEN }}
       run: |
