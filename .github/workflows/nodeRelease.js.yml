@@ -39,22 +39,22 @@ jobs:
       run: |
         npx https://github.com:janhalama/keep-a-changelog.git --release
         echo "RELEASE_SUCCESS=$($?) >> $GITHUB_ENV
-    - if: ${{ RELEASE_SUCCESS == 0 }}
+    - if: ${{ RELEASE_SUCCESS }} == 0
       run: |
         echo "NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)" >> $GITHUB_ENV
-    - if: ${{ RELEASE_SUCCESS == 0 }}
+    - if: ${{ RELEASE_SUCCESS }} == 0
       name: commit changelog changes
       run: |
         git config --global user.email "mail@janhalama.cz"
         git config --global user.name "GitHub Actions build job"
         git add "CHANGELOG.md"
         git commit -m "docs: update changelog"
-    - if: ${{ RELEASE_SUCCESS == 0 }}
+    - if: ${{ RELEASE_SUCCESS }} == 0
       name: create tag
       run: |
         echo ${NEW_VERSION}
         yarn version --new-version ${NEW_VERSION} 
-    - if: ${{ RELEASE_SUCCESS == 0 }}
+    - if: ${{ RELEASE_SUCCESS }} == 0
       name: push changes
       env:
         GITHUB_TOKEN: ${{ secrets.JANS_GITHUB_TOKEN }}
