@@ -5,6 +5,9 @@
 
 This is public profile of Jan Halama. Backend is written in progressive [Nest.js](https://nestjs.com/) framework. Frontend  is based on [webthemez.com](https://webthemez.com/free-bootstrap-templates/) template.
 
+![Build](https://github.com/janhalama/jan-halama-profile/workflows/Node.js%20CI/badge.svg?branch=main)
+![Deploy](https://github.com/janhalama/jan-halama-profile/workflows/Deploy%20to%20Heroku/badge.svg?branch=main)
+
 ## Installation
 
 ```bash
