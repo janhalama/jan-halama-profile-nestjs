@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     outputs:
-      releasable: ${{ steps.checkReleasability.outputs.releasable }}
+      releaseExitCode: ${{ steps.checkReleasability.outputs.releaseExitCode }}
     steps:
     - name: checkout
       uses: actions/checkout@v2
@@ -41,15 +41,17 @@ jobs:
       continue-on-error: true
       run: |
         npx https://github.com:janhalama/keep-a-changelog.git --release
+        echo "::set-output name=releaseExitCode::($?)"
   release:
     runs-on: ubuntu-latest
     needs: test-releasability
-    if: ${{ needs.test-releasability.result == 'success' }}
+    if: ${{ needs.test-releasability.result == 'success' && needs.test-releasability.outputs.releaseExitCode == 0}}
     steps:
     - name: checkout
       uses: actions/checkout@v2
     - name: update changelog
       run: |
+        echo ${{needs.test-releasability.outputs.releaseExitCode}}
         echo ${{needs.test-releasability.result}}
         npx https://github.com:janhalama/keep-a-changelog.git --release
     - name: get new version
