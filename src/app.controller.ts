@@ -12,7 +12,7 @@ export class AppController {
     return res.render(
       this.appService.getViewName(),
       {
-        version: process.env.npm_package_version,
+        version: require('../../package.json').version,
         messageSendingResult: (messageSendingResult.success === undefined) ? undefined : messageSendingResult
       }
     );

@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+- view version in page footer when running in docker
 
 ## [1.1.2] - 2021-01-04
 ### Fixed
