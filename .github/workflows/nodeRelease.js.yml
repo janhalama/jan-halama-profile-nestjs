@@ -36,11 +36,11 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - name: check relesability
+    - name: check releasability
       id: checkReleasability
       continue-on-error: true
       run: |
-        npx https://github.com:janhalama/keep-a-changelog.git --release
+        OUTPUT=$(npx https://github.com:janhalama/keep-a-changelog.git --release)
         echo "::set-output name=releaseExitCode::$?"
   release:
     runs-on: ubuntu-latest
