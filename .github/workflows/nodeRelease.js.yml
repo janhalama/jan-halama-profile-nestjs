@@ -40,9 +40,8 @@ jobs:
       id: checkReleasability
       continue-on-error: true
       run: |
-        EXIT_CODE=$(npx https://github.com:janhalama/keep-a-changelog.git --release | tail -1)
-        echo $EXIT_CODE
-        echo "::set-output name=releaseExitCode::$EXIT_CODE"
+        npx https://github.com:janhalama/keep-a-changelog.git --release
+        echo "::set-output name=releaseExitCode::$?"
   release:
     runs-on: ubuntu-latest
     needs: test-releasability
