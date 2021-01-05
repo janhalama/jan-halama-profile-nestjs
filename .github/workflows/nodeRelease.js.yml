@@ -29,6 +29,7 @@ jobs:
     - name: end-to-end test
       run: yarn test:e2e
   test-releasability:
+    runs-on: ubuntu-latest
     needs: test
     outputs:
       releasable: ${{ steps.checkReleasability.outputs.releasable }}
@@ -40,9 +41,9 @@ jobs:
         echo "::set-output name=releasable::$?"
         exit 0
   release:
+    runs-on: ubuntu-latest
     needs: test-releasability
     if: needs.test-releasability.outputs.releasable == 0
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
