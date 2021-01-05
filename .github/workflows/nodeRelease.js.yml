@@ -40,12 +40,12 @@ jobs:
       id: checkReleasability
       continue-on-error: true
       run: |
-        npx https://github.com:janhalama/keep-a-changelog.git --release
-        echo "::set-output name=releaseExitCode::($?)"
+        EXIT_CODE=$(npx https://github.com:janhalama/keep-a-changelog.git --release | tail -1)
+        echo "::set-output name=releaseExitCode::$EXIT_CODE"
   release:
     runs-on: ubuntu-latest
     needs: test-releasability
-    if: ${{ needs.test-releasability.result == 'success' && needs.test-releasability.outputs.releaseExitCode == 0}}
+    if: needs.test-releasability.outputs.releaseExitCode == 0
     steps:
     - name: checkout
       uses: actions/checkout@v2
