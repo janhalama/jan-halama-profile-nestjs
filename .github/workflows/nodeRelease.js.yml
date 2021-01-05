@@ -28,8 +28,19 @@ jobs:
       run: yarn test
     - name: end-to-end test
       run: yarn test:e2e
-  release:
+  test-releasability:
     needs: test
+    outputs:
+      releasable: ${{ steps.checkReleasability.outputs.releasable }}
+    - name: check relesability
+      id: checkReleasability
+      run: |
+        npx https://github.com:janhalama/keep-a-changelog.git --release
+        echo "::set-output name=releasable::$?"
+        exit 0
+  release:
+    needs: test-releasability
+    if: needs.test-releasability.outputs.releasable == 0
     runs-on: ubuntu-latest
     strategy:
       matrix:
