@@ -41,6 +41,7 @@ jobs:
       continue-on-error: true
       run: |
         EXIT_CODE=$(npx https://github.com:janhalama/keep-a-changelog.git --release | tail -1)
+        echo $EXIT_CODE
         echo "::set-output name=releaseExitCode::$EXIT_CODE"
   release:
     runs-on: ubuntu-latest
