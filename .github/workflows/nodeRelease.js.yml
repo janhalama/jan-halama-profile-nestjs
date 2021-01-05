@@ -41,7 +41,7 @@ jobs:
       continue-on-error: true
       run: |
         PREVIOUS_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)
-        $(npx https://github.com:janhalama/keep-a-changelog.git --release | tail -1)
+        npx https://github.com:janhalama/keep-a-changelog.git --release | tail -1
         NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)
         echo $PREVIOUS_VERSION
         echo $NEW_VERSION
