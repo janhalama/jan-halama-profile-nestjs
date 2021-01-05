@@ -9,10 +9,11 @@ export class AppController {
 
   @Get()
   root(@Query() messageSendingResult: CreateMessageResult, @Res() res: Response) {
+    
     return res.render(
       this.appService.getViewName(),
       {
-        version: require('../../package.json').version,
+        version: this.appService.getAppVersion(),
         messageSendingResult: (messageSendingResult.success === undefined) ? undefined : messageSendingResult
       }
     );
