@@ -38,7 +38,7 @@ jobs:
     - name: update changelog
       run: |
         npx https://github.com:janhalama/keep-a-changelog.git --release
-        echo "RELEASE_SUCCESS=$($?) >> $GITHUB_ENV
+        echo "RELEASE_SUCCESS=$($?)" >> $GITHUB_ENV
     - if: ${{ RELEASE_SUCCESS }} == 0
       run: |
         echo "NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)" >> $GITHUB_ENV
