@@ -45,8 +45,8 @@ jobs:
         NEW_VERSION=$(npx https://github.com:janhalama/keep-a-changelog.git --latest-release)
         echo $PREVIOUS_VERSION
         echo $NEW_VERSION
-        echo $(PREVIOUS_VERSION == NEW_VERSION)
-        echo "::set-output name=releasable::$(PREVIOUS_VERSION == NEW_VERSION)"
+        echo $($PREVIOUS_VERSION -ne $NEW_VERSION)
+        echo "::set-output name=releasable::$($PREVIOUS_VERSION -ne $NEW_VERSION)"
   release:
     runs-on: ubuntu-latest
     needs: test-releasability
