@@ -38,6 +38,7 @@ jobs:
       uses: actions/checkout@v2
     - name: check relesability
       id: checkReleasability
+      continue-on-error: true
       run: |
         npx https://github.com:janhalama/keep-a-changelog.git --release
         echo "::set-output name=releasable::$?"
