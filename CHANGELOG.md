@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- profile image is rendered randomly from available profile images
+
+### Changed
+- updated profile image
+- tidy up in public/img folder (unused images removed)
+
 ## [1.1.3] - 2021-01-05
 ### Fixed
 - view version in page footer when running in docker

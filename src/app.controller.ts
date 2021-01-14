@@ -9,11 +9,12 @@ export class AppController {
 
   @Get()
   root(@Query() messageSendingResult: CreateMessageResult, @Res() res: Response) {
-    
+    const profileImagesCount = 2;
     return res.render(
       this.appService.getViewName(),
       {
         version: this.appService.getAppVersion(),
+        profileId: ((Math.round(Math.random() * 10)) % profileImagesCount) + 1,
         messageSendingResult: (messageSendingResult.success === undefined) ? undefined : messageSendingResult
       }
     );
