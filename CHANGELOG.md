@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.0] - 2021-01-14
 ### Added
 - profile image is rendered randomly from available profile images
 
@@ -34,7 +35,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First version
 
-[Unreleased]: https://github.com/janhalama/jan-halama-profile/compare/v1.1.3...HEAD
+[Unreleased]: https://github.com/janhalama/jan-halama-profile/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/janhalama/jan-halama-profile/compare/v1.1.3...v2.0.0
 [1.1.3]: https://github.com/janhalama/jan-halama-profile/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/janhalama/jan-halama-profile/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/janhalama/jan-halama-profile/compare/v1.1.0...v1.1.1
